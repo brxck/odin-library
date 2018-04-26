@@ -3,15 +3,24 @@ html
   head
     title OdinLibrary
     link href="assets/milligram.css" rel="stylesheet" type="text/css"
-    script src="assets/script.js" type="text/js"
+    
   body
     div.container
       h1 OdinLibrary
-      table#library
+      button.button#add-book New Book
+
+      .row
+        .column.column-50.column-offset-25
+          #book-form
+      
+      table
         thead
           tr
             th Title
             th Author
             th Pages
             th Read
-        
+            th 
+        tbody#library
+
+    script src="assets/script.js" type="text/javascript"      
