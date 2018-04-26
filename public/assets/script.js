@@ -7,13 +7,23 @@ let favoriteBook = new Book("Hiero's Journey",
                             "Sterling E. Lanier",
                             200,
                             true)
+let otherBook = new Book("The Martian Chronicles",
+                          "Ray Bradbury",
+                          300,
+                          true)
+let nextBook = new Book("Infinite Jest",
+                        "David Foster Wallace",
+                        500,
+                        false)
 myLibrary.push(favoriteBook)
+myLibrary.push(otherBook)
+myLibrary.push(nextBook)
 
 function Book(title, author, pages, read) {
   this.title = title
   this.author = author
   this.pages = pages
-  this.read = read ? "read" : "not yet"
+  this.read = read ? "read" : "nope"
 }
 
 function newBookButton() {
@@ -62,7 +72,7 @@ function addToLibrary() {
     document.forms[0].title.value,
     document.forms[0].author.value,
     document.forms[0].pages.value,    
-    document.forms[0].read.value == "on" ? "read" : "not yet")
+    document.forms[0].read.value == "on" ? "read" : "nope")
   myLibrary.push(newBook)
   newBookButton()
   render()
@@ -73,6 +83,11 @@ function removeFromLibrary(index) {
   render()
 }
 
+function toggleRead(index) {
+  myLibrary[index].read = (myLibrary[index].read == "read" ? "nope" : "read")
+  render()
+}
+
 function render() {
   library.innerHTML = ""
   for (let [index, book] of myLibrary.entries()) {
@@ -80,12 +95,18 @@ function render() {
     // Can't use for loop on book because it's unordered
     for (let i = 0; i < bookProperties.length; i++) {
       let tableData = document.createElement("td")
-      tableData.innerHTML = book[bookProperties[i]]
+      if (bookProperties[i] == "read") {
+        // Anonymous function necessary to prevent calling right now        
+        tableData.innerHTML = `<a href='#'>${book[bookProperties[i]]}</a>`
+        tableData.addEventListener("click", function() { toggleRead(index) })
+      } else {
+        tableData.innerHTML = book[bookProperties[i]]
+      }
       entry.append(tableData)
     }
     let removeButton = document.createElement("a")
     removeButton.href = "#"    
-    removeButton.innerHTML = "remove"
+    removeButton.innerHTML = "×"
     removeButton.addEventListener("click", function() { removeFromLibrary(index) })
     let removeCell = document.createElement("td")
     removeCell.append(removeButton)
