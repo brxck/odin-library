@@ -15,9 +15,7 @@ let nextBook = new Book("Infinite Jest",
                         "David Foster Wallace",
                         500,
                         false)
-myLibrary.push(favoriteBook)
-myLibrary.push(otherBook)
-myLibrary.push(nextBook)
+myLibrary.push(favoriteBook, otherBook, nextBook)
 
 function Book(title, author, pages, read) {
   this.title = title
@@ -41,10 +39,12 @@ function newBookButton() {
 // But this is good practice with DOM manipulation.
 function renderForm() {
   let formTag = document.createElement("form")
+
   for (let i = 0; i < bookProperties.length; i++) {
     let input = document.createElement("input")
     input.name = bookProperties[i]
     input.placeholder = bookProperties[i]
+
     if (bookProperties[i] == "read") {
       input.type = "checkbox"
       let checkBoxLabel = document.createElement("label")
@@ -59,6 +59,7 @@ function renderForm() {
       formTag.append(input)
     }
   }    
+
   let submitButton = document.createElement("button")
   submitButton.type = "button"
   submitButton.innerHTML = "Add to library"
@@ -90,8 +91,9 @@ function toggleRead(index) {
 
 function render() {
   library.innerHTML = ""
-  for (let [index, book] of myLibrary.entries()) {
+    for (let [index, book] of myLibrary.entries()) {
     let entry = document.createElement("tr")
+    
     // Can't use for loop on book because it's unordered
     for (let i = 0; i < bookProperties.length; i++) {
       let tableData = document.createElement("td")
@@ -104,10 +106,12 @@ function render() {
       }
       entry.append(tableData)
     }
+
     let removeButton = document.createElement("a")
     removeButton.href = "#"    
     removeButton.innerHTML = "×"
     removeButton.addEventListener("click", function() { removeFromLibrary(index) })
+
     let removeCell = document.createElement("td")
     removeCell.append(removeButton)
     entry.append(removeCell)
