@@ -22,14 +22,14 @@ function newBookButton() {
     emptyDiv.id = "book-form"
     document.getElementById("book-form").replaceWith(emptyDiv)
   } else {
-    renderNewBookForm()
+    renderForm()
   }
   newBookToggle = !newBookToggle
 }
 
 // It would probably be better to use template strings,
 // But this is good practice with DOM manipulation.
-function renderNewBookForm() {
+function renderForm() {
   let formTag = document.createElement("form")
   for (let i = 0; i < bookProperties.length; i++) {
     let input = document.createElement("input")
@@ -52,12 +52,12 @@ function renderNewBookForm() {
   let submitButton = document.createElement("button")
   submitButton.type = "button"
   submitButton.innerHTML = "Add to library"
-  submitButton.addEventListener("click", addBookToLibrary)
+  submitButton.addEventListener("click", addToLibrary)
   formTag.append(submitButton)
   document.getElementById("book-form").append(formTag)
 }
 
-function addBookToLibrary() {
+function addToLibrary() {
   let newBook = new Book(
     document.forms[0].title.value,
     document.forms[0].author.value,
@@ -68,7 +68,7 @@ function addBookToLibrary() {
   render()
 }
 
-function removeBookFromLibrary(index) {
+function removeFromLibrary(index) {
   myLibrary.splice(index, 1)
   render()
 }
@@ -86,7 +86,7 @@ function render() {
     let removeButton = document.createElement("a")
     removeButton.href = "#"    
     removeButton.innerHTML = "remove"
-    removeButton.addEventListener("click", function() { removeBookFromLibrary(index) })
+    removeButton.addEventListener("click", function() { removeFromLibrary(index) })
     let removeCell = document.createElement("td")
     removeCell.append(removeButton)
     entry.append(removeCell)
