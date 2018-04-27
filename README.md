@@ -3,7 +3,7 @@
 A small exercise in tracking books using only Javascript.
 Books can be added, removed, and marked as read.
 
-Check it out [here.](http://brockmcelroy.com/odin-library).'
+Check it out [here.](http://brockmcelroy.com/odin-library)
 
 ## Setup
 
