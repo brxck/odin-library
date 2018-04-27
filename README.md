@@ -9,3 +9,5 @@ Check it out [here.](http://brockmcelroy.com/odin-library)
 
 HTML is templated in Slim and compiled using slim_guard.
 guard-livereload is really useful for updating the page in-browser as changes are made.
+
+The [Milligram](https://milligram.io/) CSS framework was used for styling this project.
